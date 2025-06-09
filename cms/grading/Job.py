@@ -555,8 +555,10 @@ class EvaluationJob(Job):
             executables=dict(submission_result.executables),
             input=testcase.input,
             output=testcase.output,
-            time_limit=dataset.time_limit,
-            memory_limit=dataset.memory_limit,
+        # ranido-begin
+            time_limit=time_limit,
+            memory_limit=memory_limit,
+        # ranido-end
             info=info
         )
 

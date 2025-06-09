@@ -66,4 +66,4 @@ class Javascript(Language):
             self, executable_filename, main=None, args=None):
         """See Language.get_evaluation_commands."""
         args = args if args is not None else []
-        return [["/usr/bin/node", executable_filename] + args]
+        return [["/etc/alternatives/node", executable_filename] + args]

@@ -35,6 +35,7 @@ from . import TaskType, \
 
 
 logger = logging.getLogger(__name__)
+logger = logging.getLogger('Worker')
 
 
 # Dummy function to mark translatable string.
@@ -223,6 +224,7 @@ class Batch(TaskType):
         commands = language.get_compilation_commands(
             filenames_to_compile, executable_filename)
 
+        logger.warning(f"compilation commands: {str(commands)}")
         # Create the sandbox.
         sandbox = create_sandbox(file_cacher, name="compile")
         job.sandboxes.append(sandbox.get_root_path())
@@ -262,6 +264,7 @@ class Batch(TaskType):
                else os.path.splitext(executable_filename)[0]
         commands = language.get_evaluation_commands(
             executable_filename, main=main)
+        logger.warning(f"execution commands: {str(commands)}")
         executables_to_get = {
             executable_filename: job.executables[executable_filename].digest
         }
@@ -293,6 +296,15 @@ class Batch(TaskType):
             sandbox.create_file_from_storage(filename, digest)
 
         # Actually performs the execution
+        # ranido-begin
+        multiprocess = job.multithreaded_sandbox
+        try:
+            if language.name == 'Javascript':
+                multiprocess = True
+            logger.warning(f"RANIDO multiprocess: {multiprocess}, language={language.name}")
+        except:
+            logger.warning('RANIDO FAILED')
+        # ranido-end
         box_success, evaluation_success, stats = evaluation_step(
             sandbox,
             commands,
@@ -301,7 +313,7 @@ class Batch(TaskType):
             writable_files=files_allowing_write,
             stdin_redirect=stdin_redirect,
             stdout_redirect=stdout_redirect,
-            multiprocess=job.multithreaded_sandbox)
+            multiprocess=multiprocess)
 
         outcome = None
         text = None

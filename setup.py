@@ -148,6 +148,9 @@ setup(
             "cmsAddParticipation=cmscontrib.AddParticipation:main",
             "cmsAddStatement=cmscontrib.AddStatement:main",
             "cmsAddSubmission=cmscontrib.AddSubmission:main",
+            # ranido-begin
+            "cmsAddSubmissionOBI=cmscontrib.AddSubmissionOBI:main",
+            # ranido-end
             "cmsAddTeam=cmscontrib.AddTeam:main",
             "cmsAddTestcases=cmscontrib.AddTestcases:main",
             "cmsAddUser=cmscontrib.AddUser:main",
@@ -193,6 +196,7 @@ setup(
             "C# / Mono=cms.grading.languages.csharp_mono:CSharpMono",
             "Haskell / ghc=cms.grading.languages.haskell_ghc:HaskellGhc",
             "Java / JDK=cms.grading.languages.java_jdk:JavaJDK",
+            "Javascript=cms.grading.languages.javascript:Javascript",
             "Pascal / fpc=cms.grading.languages.pascal_fpc:PascalFpc",
             "PHP=cms.grading.languages.php:Php",
             "Python 3 / CPython=cms.grading.languages.python3_cpython:Python3CPython",

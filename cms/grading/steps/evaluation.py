@@ -206,7 +206,10 @@ def evaluation_step_before_run(sandbox, command,
     sandbox.set_multiprocess(multiprocess)
 
     # Actually run the evaluation command.
-    logger.debug("Starting execution step.")
+    # ranido-begin
+    #logger.debug("Starting execution step.")
+    logger.info(f"Starting execution step with multiprocess={multiprocess}.")
+    # ranido-end
     return sandbox.execute_without_std(command, wait=wait)
 
 

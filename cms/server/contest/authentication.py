@@ -158,7 +158,6 @@ def validate_login(
     # logger.info(f"saved IP, {participation.ip}")
     # ranido-end
 
-    .
     return (participation,
             json.dumps([username, correct_password, make_timestamp(timestamp)])
                 .encode("utf-8"))
